@@ -22,6 +22,7 @@ if [ "$USE_LOCAL_MONGO" == "1" ]; then
     --restart=always \
     --publish=$PORT:80 \
     --volume=$BUNDLE_PATH:/bundle \
+    --volume=/etc/timezone:/etc/localtime \
     --env-file=$ENV_FILE \
     --link=mongodb:mongodb \
     --hostname="$HOSTNAME-$APPNAME" \
@@ -34,6 +35,7 @@ else
     --restart=always \
     --publish=$PORT:80 \
     --volume=$BUNDLE_PATH:/bundle \
+    --volume=/etc/timezone:/etc/localtime \
     --hostname="$HOSTNAME-$APPNAME" \
     --env-file=$ENV_FILE \
     --name=$APPNAME \
@@ -47,6 +49,7 @@ fi
     --restart=always \
     --volume=/opt/$APPNAME/config/bundle.crt:/bundle.crt \
     --volume=/opt/$APPNAME/config/private.key:/private.key \
+    --volume=/etc/timezone:/etc/localtime \
     --link=$APPNAME:backend \
     --publish=<%= sslConfig.port %>:443 \
     --name=$APPNAME-frontend \
